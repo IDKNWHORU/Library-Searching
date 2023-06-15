@@ -7,10 +7,10 @@ his project is a test of application implementation for [Trevari](https://m.trev
 - [ ] It has two screens: [List] and [Details].
 - [ ] When a user selects a result from the [List] screen, the [Details] screen is displayed, showing the detailed information.
 2. Basic requirements
-- [ ] Develop using TypeScript and React (CRA).
-- [ ] Use GitHub issues to manage issues.
+- [X] Develop using TypeScript and React (CRA).
+- [X] Use GitHub issues to manage issues.
 3. Preferred requirements
-- [ ] Write unit tests.
+- [X] Write unit tests.
 - [ ] Implement using Next.js.
 4. Detailed implementation
     
