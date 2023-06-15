@@ -4,8 +4,8 @@ his project is a test of application implementation for [Trevari](https://m.trev
 
 ## Check List
 1. Implement a book search website.
-- [ ] It has two screens: [List] and [Details].
-- [ ] When a user selects a result from the [List] screen, the [Details] screen is displayed, showing the detailed information.
+- [X] It has two screens: [List] and [Details].
+- [X] When a user selects a result from the [List] screen, the [Details] screen is displayed, showing the detailed information.
 2. Basic requirements
 - [X] Develop using TypeScript and React (CRA).
 - [X] Use GitHub issues to manage issues.
@@ -15,7 +15,7 @@ his project is a test of application implementation for [Trevari](https://m.trev
 4. Detailed implementation
     
     a. [List] Displays book information that has been searched for a specific keyword.
-    - [ ] The following properties must be displayed on the screen from the data received in JSON.
+    - [X] The following properties must be displayed on the screen from the data received in JSON.
     ```JSON
     {
         "title": "MongoDB in Action, 2nd Edition",
@@ -30,7 +30,7 @@ his project is a test of application implementation for [Trevari](https://m.trev
         - [ ] The "not(-)" operator searches for books that contain the previous keyword in the title, but do not contain the following keyword. (e.g. "tdd-javascript": searches for books that contain the tdd keyword in the title, but do not contain the javascript keyword.)
     
     b. [Detail]: Displays the detailed information of the selected book from the book list.
-    - [ ] The following properties must be displayed on the screen from the data received in JSON.
+    - [X] The following properties must be displayed on the screen from the data received in JSON.
     ```JSON
     {
 	    "title":"MongoDB in Action, 2nd Edition",
