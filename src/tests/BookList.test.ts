@@ -1,16 +1,10 @@
-import fetch from "node-fetch";
 import { BookList } from "../apis/BookList.api";
-import { APIRequest, BookAPIRequest } from "../apis/Request";
+import { BookAPIRequest } from "../apis/Request";
 import { Book } from "../apis/models/Library.type";
-
-class FetchAPI implements APIRequest {
-  get(url: string): Promise<any> {
-    return fetch(url);
-  }
-}
+import { FetchTestAPI } from "./test.util";
 
 test("search book list [keywords: mongodb]", async () => {
-  const bookTestApiRequest = BookAPIRequest.of(new FetchAPI());
+  const bookTestApiRequest = BookAPIRequest.of(new FetchTestAPI());
   const mongodbBooks = await BookList.getInstance(
     bookTestApiRequest
   ).getBookList<Book>("mongodb");
@@ -19,7 +13,7 @@ test("search book list [keywords: mongodb]", async () => {
 });
 
 test("search book list empty keyword throw error", async () => {
-  const bookTestApiRequest = BookAPIRequest.of(new FetchAPI());
+  const bookTestApiRequest = BookAPIRequest.of(new FetchTestAPI());
 
   await expect(async () => {
     await BookList.getInstance(bookTestApiRequest).getBookList<Book>("");
