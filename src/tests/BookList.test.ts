@@ -19,3 +19,24 @@ test("search book list empty keyword throw error", async () => {
     await BookList.getInstance(bookTestApiRequest).getBookList<Book>("");
   }).rejects.toThrowError(new Error("[search] Invalid request"));
 });
+
+test("mongodb book page one and page two list not equal", async () => {
+  const bookTestApiRequest = BookAPIRequest.of(new FetchTestAPI());
+  const bookListInstance = BookList.getInstance(
+    bookTestApiRequest
+  );
+  const mongodbBooksPageOne = await bookListInstance.getBookList<Book>("mongodb", "1");
+  const mongodbBooksPageTwo = await bookListInstance.getBookList<Book>("mongodb", "2");
+
+  expect(mongodbBooksPageOne[0].isbn13).not.toEqual(mongodbBooksPageTwo[0].isbn13);
+});
+
+test("mongodb book last page is empty", async () => {
+  const bookTestApiRequest = BookAPIRequest.of(new FetchTestAPI());
+  const bookListInstance = BookList.getInstance(
+    bookTestApiRequest
+  );
+  const mongodbBooksLastPage = await bookListInstance.getBookList<Book>("mongodb", "9");
+
+  expect(mongodbBooksLastPage.length).toBe(0);
+});
