@@ -24,7 +24,7 @@ his project is a test of application implementation for [Trevari](https://m.trev
         "url": "https://itbook.store/books/9781617291609"
     }
     ```
-    - [ ] Implement infinite scrolling.
+    - [X] Implement infinite scrolling.
     - [ ] Allow users to enter specific keywords. Keywords can be up to two and are separated by the "or" and "not" operators.
         - [ ] The "or(|)" operator displays the results of the search for each keyword. (e.g. "tdd|javascript": the results of the search for tdd and the results of the search for javascript are combined.)
         - [ ] The "not(-)" operator searches for books that contain the previous keyword in the title, but do not contain the following keyword. (e.g. "tdd-javascript": searches for books that contain the tdd keyword in the title, but do not contain the javascript keyword.)
