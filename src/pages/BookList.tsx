@@ -40,15 +40,52 @@ export const BookListPage = ({
       if (bookListRef.current === null) return;
       if (keyword.length < 2) return;
 
-      bookListRef.current
-        .getBookList<Book>(keyword, `${pageNumber}`)
-        .then((newBooks) => {
-          if (newBooks.length === 0) {
-            setIsLastPage(true);
-          } else {
-            setBooks((prevBooks) => [...prevBooks, ...newBooks]);
-          }
-        });
+      if (keyword.includes("|")) {
+        const keywords = keyword.split("|");
+        const getBooksKeywords = keywords.map((keyword) =>
+          bookListRef.current?.getBookList<Book>(keyword, `${pageNumber}`)
+        );
+
+        const newBooks = await Promise.all(getBooksKeywords);
+        const books = newBooks.flat() as Book[];
+
+        if (books.length === 0) {
+          setIsLastPage(true);
+        } else {
+          setBooks((prevBooks) => [...prevBooks, ...books]);
+        }
+      } else if (keyword.includes("-")) {
+        const [includedKeyword, excludedKeyword] = keyword.split("-");
+
+        bookListRef.current
+          .getBookList<Book>(includedKeyword, `${pageNumber}`)
+          .then((newBooks) => {
+            if (newBooks.length === 0) {
+              setIsLastPage(true);
+            } else {
+              const books = newBooks.filter(
+                (book) =>
+                  !book.title
+                    .toLowerCase()
+                    .includes(excludedKeyword.toLowerCase())
+              );
+              setBooks((prevBooks) => [...prevBooks, ...books]);
+            }
+          });
+      } else {
+        bookListRef.current
+          .getBookList<Book>(keyword, `${pageNumber}`)
+          .then((newBooks) => {
+            if (newBooks.length === 0) {
+              setIsLastPage(true);
+            } else {
+              setBooks((prevBooks) => [...prevBooks, ...newBooks]);
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
     };
 
     getBooks();
@@ -91,6 +128,12 @@ export const BookListPage = ({
       <input
         type="text"
         onChange={(e) => {
+          if (e.target.value.split(/[-|]/).length > 2) {
+            alert('최대 2개의 키워드까지만 입력할 수 있습니다.');
+            e.target.value = e.target.value.slice(0, -1);
+            return;
+          }
+          
           if (debounceTimeoutRef.current) {
             clearTimeout(debounceTimeoutRef.current);
           }
