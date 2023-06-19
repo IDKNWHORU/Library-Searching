@@ -15,15 +15,14 @@ export class BookList {
 
     static getInstance(request: BookAPIRequest) {
         if(!BookList.instance) {
-            return new BookList(request);
+            this.instance = new BookList(request);
         }
 
         return this.instance;
     }
 
-    async getBookList<T>(keyword: string, pageNumber?: string): Promise<T[]> {
-        const baseUrl = `https://api.itbook.store/1.0/search/${keyword}`;
-        const bookListUrl = (pageNumber) ? `${baseUrl}/${pageNumber}`: baseUrl;
+    async getBookList<T>(keyword: string, pageNumber: string): Promise<T[]> {
+        const bookListUrl = `https://api.itbook.store/1.0/search/${keyword}/${pageNumber}`;
 
         const response = await this.request.get(bookListUrl);
         const data:APIResponse<T> = await response.json();
