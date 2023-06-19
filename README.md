@@ -1,6 +1,16 @@
 # Library-Searching
 his project is a test of application implementation for [Trevari](https://m.trevari.co.kr/).
 
+## Scripts
+### Develop
+``` sh
+npm run dev
+```
+
+### Test
+``` sh
+npm run test
+```
 
 ## Check List
 1. Implement a book search website.
